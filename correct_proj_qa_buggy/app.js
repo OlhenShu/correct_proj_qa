@@ -21,6 +21,12 @@ const prevPageBtn = document.getElementById('prevPage');
 const nextPageBtn = document.getElementById('nextPage');
 const lastPageBtn = document.getElementById('lastPage');
 
+// BUG: Intentional UI freeze - blocks main thread for ms milliseconds
+function simulateFreeze(ms) {
+    const start = Date.now();
+    while (Date.now() - start < ms) {}
+}
+
 // Initialize application
 function init() {
     loadUsersFromStorage();
@@ -100,6 +106,11 @@ function loadUsersFromStorage() {
 function performSearch() {
     const searchTerm = searchField.value.trim();
     
+    // BUG: Intentional freeze when search term has 3+ characters (~2.5 sec)
+    if (searchTerm.length >= 3) {
+        simulateFreeze(2500);
+    }
+    
     // Clear error message
     searchError.textContent = '';
     const searchWrapper = searchField.closest('.search-wrapper');
@@ -127,6 +138,8 @@ function performSearch() {
 }
 
 function clearSearch() {
+    // BUG: Intentional freeze on Clear button (~1.5 sec)
+    simulateFreeze(1500);
     searchField.value = '';
     searchError.textContent = '';
     const searchWrapper = searchField.closest('.search-wrapper');
@@ -237,6 +250,10 @@ function handleSortClick(column) {
         return;
     }
     // BUG: Number is sortable (not filtered out)
+    // BUG: Intentional freeze when sorting by E-mail column (~2 sec)
+    if (column === 'email') {
+        simulateFreeze(2000);
+    }
     
     if (currentSort.column === column) {
         currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
@@ -345,7 +362,10 @@ function updatePagination() {
 function goToPage(page) {
     const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
     if (page < 1 || page > totalPages) return;
-    
+    // BUG: Intentional freeze when clicking Next or Last (~1.2 sec)
+    if (page > currentPage) {
+        simulateFreeze(1200);
+    }
     currentPage = page;
     renderUsers();
     updatePagination();
@@ -388,7 +408,9 @@ function setupEventListeners() {
     });
     
     // BUG: when changing users per page, do NOT reset to page 1 - can show empty page
+    // BUG: Intentional freeze when changing "users per page" (~1.8 sec)
     usersPerPageSelect.addEventListener('change', (e) => {
+        simulateFreeze(1800);
         usersPerPage = parseInt(e.target.value, 10);
         renderUsers();
         updatePagination();

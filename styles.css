@@ -12,6 +12,22 @@ body {
     color: #333;
 }
 
+.version-switcher {
+    max-width: 1200px;
+    margin: 0 auto 15px;
+    text-align: right;
+}
+
+.version-switcher a {
+    color: rgba(255,255,255,0.9);
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.version-switcher a:hover {
+    color: #fff;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
