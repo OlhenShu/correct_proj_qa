@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List - QA Prototype</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="page-title">User List</h1>
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <input 
+                        type="text" 
+                        id="searchField" 
+                        class="search-field" 
+                        placeholder="Serch by First Name, Last Name, or E-mail"
+                        maxlength="45"
+                    >
+                    <button id="searchButton" class="search-button" aria-label="Search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                    <button id="clearSearchButton" class="clear-button" aria-label="Clear search and reset sorting" title="Clear search and reset sorting">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div id="searchError" class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="users-info">
+            <span id="usersCount" class="users-count">Users count: 0</span>
+        </div>
+
+        <div class="table-container">
+            <table id="usersTable" class="users-table">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-column="number">Number</th>
+                        <th class="sortable" data-column="firstName">First Name</th>
+                        <th class="sortable" data-column="lastName">Last Name</th>
+                        <th class="sortable" data-column="email">Email</th>
+                        <th data-column="registrationDate">Registration Date</th>
+                        <th>View</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <!-- Users will be populated here -->
+                </tbody>
+            </table>
+            <div id="noUsersMessage" class="no-users-message" style="display: none;">
+                No users found
+            </div>
+        </div>
+
+        <div id="paginationContainer" class="pagination-container">
+            <div class="pagination-left">
+                <label for="usersPerPageSelect" class="users-per-page-label">Show</label>
+                <select id="usersPerPageSelect" class="users-per-page-select">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                <span class="users-per-page-label">users per page</span>
+            </div>
+            <div class="pagination-info">
+                <span id="pageInfo">Page 1 of 1</span>
+            </div>
+            <div class="pagination-controls">
+                <button id="firstPage" class="pagination-btn" disabled>First</button>
+                <button id="prevPage" class="pagination-btn" disabled>Prev</button>
+                <button id="nextPage" class="pagination-btn" disabled>Next</button>
+                <button id="lastPage" class="pagination-btn" disabled>Last</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

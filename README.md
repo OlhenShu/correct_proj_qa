@@ -2,6 +2,15 @@
 
 Прототип для QA тестування функціональності списку користувачів згідно User Story 1.
 
+## Дві версії
+
+| Версія | Опис | GitHub Pages |
+|--------|------|--------------|
+| **Коректна** | Головна сторінка (корінь репозиторію) | `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/` |
+| **Buggy** | Версія з навмисними багами для QA | `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/correct_proj_qa_buggy/` |
+
+Деталі buggy-версії — у папці [correct_proj_qa_buggy](correct_proj_qa_buggy/).
+
 ## Опис
 
 Цей прототип реалізує сторінку списку користувачів з можливостями пошуку, сортування та пагінації.
@@ -49,32 +58,37 @@
 
 ### Розгортання на GitHub Pages
 
-#### Автоматичне розгортання (рекомендовано)
-1. Перейдіть у Settings вашого репозиторію на GitHub
-2. В лівому меню виберіть "Pages"
-3. У розділі "Source" виберіть:
-   - Source: "GitHub Actions"
-4. Зробіть commit і push до гілки `main`
-5. GitHub Actions автоматично розгорне проєкт
-6. Через кілька хвилин ваш сайт буде доступний за адресою:
+#### Варіант 1: Через GitHub Actions (автоматично)
+1. Перейдіть у **Settings** → **Pages** вашого репозиторію
+2. У розділі **Source** виберіть:
+   - **Source**: `GitHub Actions`
+3. Натисніть **Save**
+4. Перейдіть у вкладку **Actions** - там має з'явитися workflow
+5. Після завершення workflow (1-2 хвилини) сайт буде доступний за адресою:
    `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`
 
-#### Ручне налаштування (альтернатива)
-1. Перейдіть у Settings → Pages
-2. У розділі "Source" виберіть:
-   - Source: "Deploy from a branch"
-   - Branch: `main` / `/ (root)`
-3. Натисніть "Save"
+#### Варіант 2: Напряму з гілки (простіше, без Actions)
+1. Перейдіть у **Settings** → **Pages**
+2. У розділі **Source** виберіть:
+   - **Source**: `Deploy from a branch`
+   - **Branch**: `main` / `/ (root)`
+3. Натисніть **Save**
 4. Через кілька хвилин сайт буде доступний
+5. **Перевага**: не потрібні Actions, працює одразу
 
 ## Структура проєкту
 
 ```
 correct_proj_qa/
-├── index.html      # Основна HTML структура
-├── styles.css      # Стилізація
-├── app.js          # Вся функціональність
-└── README.md       # Документація
+├── index.html              # Коректна версія (головна сторінка)
+├── styles.css
+├── app.js
+├── README.md
+└── correct_proj_qa_buggy/   # Версія з багами для QA
+    ├── index.html
+    ├── styles.css
+    ├── app.js
+    └── README.md
 ```
 
 ## Технології
